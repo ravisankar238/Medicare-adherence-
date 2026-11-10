@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
   Settings, Bell, ShieldCheck, Smartphone, 
-  MessageSquare, Volume2, Globe, RotateCcw, Check, User, Mail
+  MessageSquare, Volume2, Globe, RotateCcw, Check, User, Mail, Download, WifiOff
 } from 'lucide-react';
+import { PWAInstallButton } from '../pwa/PWAInstallButton';
 
 export const SettingsView: React.FC = () => {
   const { caregiverSettings, updateSettings, resetDemoData, authUser } = useApp();
@@ -241,6 +242,62 @@ export const SettingsView: React.FC = () => {
               className="w-full px-3 py-2 rounded-xl border border-slate-300 font-medium text-slate-800"
             />
           </div>
+        </div>
+      </div>
+
+      {/* App Installation & Local Offline Mode Card */}
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <Download className="w-5 h-5 text-teal-700" />
+            <span>App Installation &amp; Local Offline Access</span>
+          </h3>
+          <span className="text-xs text-teal-800 font-bold bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+            PWA Ready
+          </span>
+        </div>
+
+        <p className="text-xs text-slate-600 leading-relaxed">
+          Install Sehat Saathi directly on your mobile device, iPad, or desktop computer. Once installed, the application loads instantaneously, runs completely offline, and sounds scheduled pill alarms without needing an active internet connection.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="font-bold text-slate-900 flex items-center gap-1.5">
+              <WifiOff className="w-4 h-4 text-teal-600" />
+              <span>Offline Cache</span>
+            </div>
+            <div className="text-slate-500 text-[11px] mt-1">
+              Active &amp; cached via Service Worker (PWA)
+            </div>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="font-bold text-slate-900 flex items-center gap-1.5">
+              <Smartphone className="w-4 h-4 text-teal-600" />
+              <span>Home Screen</span>
+            </div>
+            <div className="text-slate-500 text-[11px] mt-1">
+              Launch like a native Android, iOS, or PC app
+            </div>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="font-bold text-slate-900 flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-teal-600" />
+              <span>Storage Size</span>
+            </div>
+            <div className="text-slate-500 text-[11px] mt-1">
+              &lt; 2 MB lightweight local footprint
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-2 flex items-center justify-between gap-3">
+          <div className="text-[11px] text-slate-500">
+            Click to trigger install prompt or view device steps for Chrome, Safari, and Edge.
+          </div>
+          <PWAInstallButton variant="card" />
         </div>
       </div>
 

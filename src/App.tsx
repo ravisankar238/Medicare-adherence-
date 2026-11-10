@@ -19,6 +19,8 @@ import { HeartHandshake, ShieldCheck, Heart } from 'lucide-react';
 
 import { GeminiChatbotModal } from './components/ai/GeminiChatbotModal';
 import { LiveVoiceConversationModal } from './components/ai/LiveVoiceConversationModal';
+import { AppInstallBanner } from './components/pwa/AppInstallBanner';
+import { OfflineIndicator } from './components/pwa/OfflineIndicator';
 
 function AppContent() {
   const { portalMode } = useApp();
@@ -28,6 +30,9 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-teal-500 selection:text-white">
+      {/* Top App Install Banner for easy download and offline local access */}
+      <AppInstallBanner />
+
       {portalMode === 'elderly' && (
         <ReceiverDashboard />
       )}
@@ -95,6 +100,9 @@ function AppContent() {
           </footer>
         </div>
       )}
+
+      {/* Global Offline Mode Status Indicator */}
+      <OfflineIndicator />
     </div>
   );
 }

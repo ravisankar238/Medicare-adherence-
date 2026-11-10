@@ -5,6 +5,7 @@ import {
   PhoneCall, Volume2, Globe, Eye, Type, HeartHandshake, UserCircle2 
 } from 'lucide-react';
 import { translations } from '../../utils/translations';
+import { PWAInstallButton } from '../pwa/PWAInstallButton';
 
 export const ElderlyTopBar: React.FC = () => {
   const { 
@@ -98,6 +99,12 @@ export const ElderlyTopBar: React.FC = () => {
             <PhoneCall className="w-4 h-4" />
             <span>SOS Help</span>
           </a>
+
+          {/* App Install Button for Local / Offline Homescreen Access */}
+          <PWAInstallButton 
+            variant="elderly" 
+            label={t.installApp || 'Install App'} 
+          />
 
           {/* Switch to Caregiver Portal */}
           <button

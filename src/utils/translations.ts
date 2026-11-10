@@ -40,6 +40,8 @@ export const translations = {
     fontSizeToggle: 'Text Size',
     highContrast: 'High Contrast',
     soundAlerts: 'Sound Alert',
+    installApp: 'Install App',
+    installAppSub: 'Use locally & offline',
     
     // Statuses
     status_upcoming: 'Upcoming',
@@ -123,6 +125,8 @@ export const translations = {
     fontSizeToggle: 'अक्षर का आकार',
     highContrast: 'हाई कंट्रास्ट',
     soundAlerts: 'अलार्म आवाज़',
+    installApp: 'ऐप डाउनलोड करें',
+    installAppSub: 'ऑफ़लाइन व स्थानीय उपयोग',
 
     // Statuses
     status_upcoming: 'आने वाली है',
@@ -206,6 +210,8 @@ export const translations = {
     fontSizeToggle: 'అక్షరాల పరిమాణం',
     highContrast: 'హై కాంట్రాస్ట్',
     soundAlerts: 'శబ్ద హెచ్చరిక',
+    installApp: 'యాప్ డౌన్‌లోడ్',
+    installAppSub: 'స్థానికంగా & ఆఫ్‌లైన్ ఉపయోగం',
 
     // Statuses
     status_upcoming: 'రాబోయే సమయం',

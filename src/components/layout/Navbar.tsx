@@ -7,6 +7,7 @@ import {
   Settings, Smartphone, ChevronDown, Check, LogOut, 
   AlertTriangle, CheckCircle2, ShieldCheck, RefreshCw 
 } from 'lucide-react';
+import { PWAInstallButton } from '../pwa/PWAInstallButton';
 
 interface NavbarProps {
   currentTab: string;
@@ -263,6 +264,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                 <span>Google Sign-In</span>
               </button>
             )}
+
+            {/* Install App Locally Button */}
+            <PWAInstallButton variant="navbar" />
 
             {/* Launch Elderly Portal Companion Button */}
             <button
