@@ -17,9 +17,20 @@ app.use(express.json({ limit: '50mb' }));
 const server = createServer(app);
 const port = process.env.PORT || 3000;
 
+// Health check endpoint for Render and uptime monitoring
+app.get('/api/health', (_req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'sehat-saathi',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
 // Initialize server-side GoogleGenAI client with required User-Agent
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY || process.env.API_KEY || '',
   httpOptions: {
     headers: {
       'User-Agent': 'aistudio-build',
@@ -217,7 +228,11 @@ async function startServer() {
 
   if (isProduction) {
     app.use(express.static(distPath));
-    app.get('*', (_req, res) => {
+    app.get('*', (req, res, next) => {
+      // Don't intercept API routes that 404
+      if (req.path.startsWith('/api/')) {
+        return next();
+      }
       res.sendFile(path.resolve(distPath, 'index.html'));
     });
   } else {
@@ -230,14 +245,22 @@ async function startServer() {
       app.use(vite.middlewares);
     } catch {
       app.use(express.static(distPath));
-      app.get('*', (_req, res) => {
+      app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api/')) {
+          return next();
+        }
         res.sendFile(path.resolve(distPath, 'index.html'));
       });
     }
   }
 
-  server.listen(port, () => {
-    console.log(`Sehat Saathi full-stack server running on http://localhost:${port}`);
+  // 404 handler for unknown API routes
+  app.use('/api/*', (_req, res) => {
+    res.status(404).json({ error: 'API route not found' });
+  });
+
+  server.listen(Number(port), '0.0.0.0', () => {
+    console.log(`Sehat Saathi full-stack server running on port ${port} (0.0.0.0)`);
   });
 }
 

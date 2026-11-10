@@ -93,9 +93,60 @@ The app will be accessible at `http://localhost:3000`.
 Copy `.env.example` to `.env`:
 ```bash
 GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
-APP_URL="http://localhost:3000"
+PORT=3000
+NODE_ENV="production"
 ```
 *Note: If no Gemini API key is provided, the application automatically uses the verified geriatric clinical knowledge base fallback.*
+
+---
+
+## 🌐 Deploying to Render (Free Web Service)
+
+This repository includes a `render.yaml` Blueprint file pre-configured for Render.
+
+### Option A: 1-Click Blueprint (Recommended)
+1. Push this repository to your GitHub account (see GitHub section below).
+2. Go to your [Render Dashboard](https://dashboard.render.com/).
+3. Click **New +** &rarr; **Blueprint**.
+4. Connect your GitHub repository `sehat-saathi`.
+5. Render will detect `render.yaml` and configure the Web Service automatically:
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm start`
+   - **Health Check Path:** `/api/health`
+6. Add your `GEMINI_API_KEY` under **Environment Variables** in Render.
+7. Click **Apply**. Render will build and deploy your app with a public `https://<your-app>.onrender.com` URL.
+
+### Option B: Manual Web Service Setup on Render
+1. In the Render Dashboard, click **New +** &rarr; **Web Service**.
+2. Connect your GitHub repository.
+3. Configure the following settings:
+   - **Environment:** `Node`
+   - **Region:** Any (e.g. Oregon, Frankfurt, Singapore)
+   - **Branch:** `main`
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm start`
+   - **Health Check Path:** `/api/health`
+4. Add Environment Variable:
+   - `GEMINI_API_KEY`: Your Google Gemini API Key
+5. Click **Create Web Service**.
+
+---
+
+## 🐙 Pushing to GitHub
+
+To push this codebase to your GitHub account:
+
+```bash
+# 1. Create a new repository on https://github.com/new (e.g., named "sehat-saathi")
+# Do NOT initialize with README or .gitignore (they are already included here)
+
+# 2. Add your GitHub remote repository (replace with your repo URL):
+git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/sehat-saathi.git
+
+# 3. Push to main branch:
+git branch -M main
+git push -u origin main
+```
 
 ---
 
